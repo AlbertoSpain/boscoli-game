@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boscoli · Aventura en el Reino Cuqui</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game">
+    <canvas id="screen" width="960" height="540"></canvas>
+    <div id="battle-ui" class="hidden">
+      <div class="spell-meter">
+        <div class="spell-label">
+          <span id="spell-name">Hechizo</span>
+          <span id="spell-time">0</span>
+        </div>
+        <div class="spell-bar"><div id="spell-fill"></div></div>
+      </div>
+      <div id="ws-grid"></div>
+      <ul id="ws-words"></ul>
+      <div class="ws-help">Flechas: mover · ESPACIO: marcar · H: pista (<span id="hint-count">3</span>)</div>
+    </div>
+  </div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/wordsearch.js"></script>
+  <script src="js/platformer.js"></script>
+  <script src="js/battle.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #2b1d3a;
+  background-image: radial-gradient(#3e2b55 2px, transparent 2px);
+  background-size: 24px 24px;
+  font-family: 'Press Start 2P', monospace;
+  user-select: none;
+}
+
+#game {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 960px;
+  height: 540px;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 6px #fff, 0 0 0 12px #ff8fb1, 0 12px 40px rgba(0, 0, 0, .6);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#screen {
+  display: block;
+  width: 960px;
+  height: 540px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Batalla: panel de la sopa de letras ---------- */
+#battle-ui {
+  position: absolute;
+  left: 492px;
+  top: 12px;
+  width: 456px;
+  height: 516px;
+  padding: 12px;
+  background: #fff8e7;
+  border: 4px solid #2b1d3a;
+  border-radius: 12px;
+  box-shadow: inset 0 -6px 0 #f3dfb5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #2b1d3a;
+}
+
+.spell-meter { width: 100%; }
+
+.spell-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.spell-bar {
+  height: 16px;
+  border: 3px solid #2b1d3a;
+  border-radius: 8px;
+  background: #e8ddff;
+  overflow: hidden;
+}
+
+#spell-fill {
+  height: 100%;
+  width: 0%;
+  background: repeating-linear-gradient(45deg, #9b5cff 0 8px, #b98bff 8px 16px);
+  transition: width .2s linear;
+}
+
+.spell-bar.danger #spell-fill {
+  background: repeating-linear-gradient(45deg, #ff3d6e 0 8px, #ff7b9c 8px 16px);
+  animation: blink .5s steps(2) infinite;
+}
+
+@keyframes blink { 50% { opacity: .55; } }
+
+#ws-grid {
+  --n: 8;
+  width: 340px;
+  height: 340px;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  grid-template-rows: repeat(var(--n), 1fr);
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid #e6d3a8;
+  border-radius: 6px;
+  font-size: calc(140px / var(--n));
+  cursor: pointer;
+  transition: transform .08s;
+}
+
+.cell:hover { border-color: #ffb84d; }
+.cell.preview { background: #ffe066; border-color: #ffb800; }
+.cell.start { background: #ffd23f; border-color: #e08a00; transform: scale(1.08); }
+.cell.cursor { outline: 4px solid #3d7bff; outline-offset: -1px; z-index: 1; }
+.cell.found { color: #fff; border-color: rgba(0, 0, 0, .15); }
+.cell.hint { animation: hint .5s ease-in-out infinite alternate; }
+.cell.wrong { animation: shake .3s; background: #ffb3c4; }
+
+@keyframes hint {
+  from { transform: scale(1); box-shadow: 0 0 0 0 #ff5c8a; }
+  to { transform: scale(1.2); box-shadow: 0 0 0 4px #ff5c8a; }
+}
+
+@keyframes shake {
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+#ws-words {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+#ws-words li {
+  font-size: 10px;
+  padding: 5px 7px;
+  background: #fff;
+  border: 2px solid #2b1d3a;
+  border-radius: 6px;
+}
+
+#ws-words li.found {
+  text-decoration: line-through;
+  color: #fff;
+  opacity: .85;
+}
+
+.ws-help {
+  margin-top: auto;
+  font-size: 8px;
+  color: #7a6a8a;
+  text-align: center;
+}
